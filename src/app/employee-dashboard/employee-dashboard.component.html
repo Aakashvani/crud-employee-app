@@ -1,0 +1,258 @@
+<nav class="navbar navbar-light bg-light shadow-sm">
+  <div class="container-fluid">
+    <h1 style="color: rgb(0, 132, 255)" class="m-auto">EMPLOYEE DASHBOARD</h1>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <!-- employee data entry section  -->
+  <div class="row">
+    <div class="col-md-4 mt-3">
+      <h3 class="text-center"><u>Employee Details Entry Form</u></h3>
+      <div class="outerDiv mt-4">
+        <form #form="ngForm">
+          <!-- name row -->
+          <div class="row">
+            <div class="col-md-4">
+              <label>Name:</label>
+            </div>
+            <div class="col-md-4">
+              <input
+                type="text"
+                [(ngModel)]="employeeObj.FirstName"
+                #fname="ngModel"
+                required
+                class="form-control"
+                name="FirstName"
+                placeholder="First Name"
+              />
+              <div *ngIf="fname.touched">
+                <span class="text-danger" *ngIf="fname.errors?.['required']"
+                  >Required</span
+                >
+              </div>
+            </div>
+            <div class="col-md-4">
+              <input
+                type="text"
+                placeholder="Last Name"
+                required
+                name="LastName"
+                #LastName="ngModel"
+                [(ngModel)]="employeeObj.LastName"
+                class="form-control"
+              />
+              <div *ngIf="LastName.touched">
+                <span class="text-danger" *ngIf="LastName.errors?.['required']">
+                  Required</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Technology row -->
+          <div class="row">
+            <div class="col-md-4">
+              <label>Email ID:</label>
+            </div>
+            <div class="col-md-8">
+              <input
+                type="email"
+                required
+                [(ngModel)]="employeeObj.EmailId"
+                class="form-control"
+                placeholder="Email ID..."
+                name="EmailId"
+                #EmailId="ngModel"
+                required
+                [(ngModel)]="employeeObj.EmailId"
+              />
+              <div *ngIf="EmailId.touched">
+                <span class="text-danger" *ngIf="EmailId.errors?.['required']">
+                  Required</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Designation row -->
+          <div class="row">
+            <div class="col-md-4">
+              <label>Designation:</label>
+            </div>
+            <div class="col-md-8">
+              <input
+                type="text"
+                placeholder="Designation"
+                name="Designation"
+                #Designation="ngModel"
+                required
+                [(ngModel)]="employeeObj.Designation"
+                class="form-control"
+              />
+              <div *ngIf="Designation.touched">
+                <span
+                  class="text-danger"
+                  *ngIf="Designation.errors?.['required']"
+                >
+                  Required</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- FrameWork dropdown button -->
+          <div class="row">
+            <div class="col-md-5">
+              <label>Framework:</label>
+            </div>
+            <div class="col-md-7">
+              <select
+                [(ngModel)]="employeeObj.Framework"
+                name="Framework"
+                class="form-control"
+                required
+                #Framework="ngModel"
+                [(ngModel)]="employeeObj.Framework"
+              >
+                <option selected value="">Select Framework</option>
+                <option>Angular.JS</option>
+                <option>React.JS</option>
+                <option>Dot Net</option>
+                <option>Express</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Input box for Company name  -->
+          <div class="row">
+            <div class="col-md-4">
+              <label>Company</label>
+            </div>
+            <div class="col-md-8">
+              <input
+                type="text"
+                name="Company"
+                placeholder="Company Name"
+                #Company="ngModel"
+                required
+                [(ngModel)]="employeeObj.Company"
+                class="form-control"
+              />
+              <div *ngIf="Company.touched">
+                <span class="text-danger" *ngIf="Company.errors?.['required']">
+                  Required</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- buttons for save and cancel -->
+          <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6 text-end">
+              <button
+                class="btn btn-secondary btn-sm mx-1"
+                style="padding-left: 20px; padding-right: 20px"
+                (click)="onCancel()"
+              >
+                Cancel
+              </button>
+
+              <button
+                class="btn btn-primary btn-sm"
+                style="padding-left: 25px; padding-right: 25px"
+                [disabled]="form.invalid"
+                (click)="onSave()"
+                (click)="showToasterSuccess()"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- employee list section  -->
+    <div class="col-md-8 mt-3">
+      <h3 class="text-center"><u>Employee List</u></h3>
+      <div class="row mt-3">
+        <!-- select box for searchbar  -->
+        <div class="row">
+          <div class="col-md-6"></div>
+          <div class="col-md-3">
+            <select
+              [(ngModel)]="sortBy"
+              required
+              name="Skill"
+              class="form-control"
+            >
+              <option selected value="">Select Sort By</option>
+              <option>Name</option>
+              <option>Company</option>
+            </select>
+          </div>
+
+          <!-- search bar  -->
+          <div class="col-md-3">
+            <input
+              type="search"
+              placeholder="Search Here..."
+              class="form-control mr-sm-2"
+              aria-label="Search"
+              [(ngModel)]="searchText"
+              (ngModelChange)="onSearch()"
+            />
+          </div>
+        </div>
+        <div class="container-fluid">
+          <table class="table table-striped">
+            <thead class="text-center">
+              <tr>
+                <th scope="col">S No.</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email ID</th>
+                <th scope="col">Designation</th>
+                <th scope="col">Framework</th>
+                <th scope="col">Company</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody class="text-center">
+              <ng-container *ngIf="employeeArr.length != 0">
+                <tr *ngFor="let item of employeeArr; let sr = index">
+                  <td>{{ sr + 1 }}</td>
+                  <td>{{ item.FirstName }} {{ item.LastName }}</td>
+                  <td>{{ item.EmailId }}</td>
+                  <td>{{ item.Designation }}</td>
+                  <td>{{ item.Framework }}</td>
+                  <td>{{ item.Company }}</td>
+                  <td>
+                    <button
+                      class="btn btn-outline-warning mx-2"
+                      (click)="onEdit(item)"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      class="btn btn-outline-danger"
+                      (click)="onDelete(item)"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              </ng-container>
+              <ng-container *ngIf="employeeArr.length == 0">
+                <tr>
+                  <td colspan="8" class="text-center">No Record are Present</td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+ this.alertService.success('Success', 'User Master');
+
+Swal alert popUp ---->
+Swal.fire("hello World")
+Swal.fire('Oops...', 'Something went wrong!', 'error');
+Swal.fire('Wow...', 'Resigister Done', 'success');
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You not able to recover this data after this action',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, Delete it',
+      cancelButtonText: 'No, Keep it',
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire('Deleted!', 'Your record has been deleted', 'success');
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire('cancelled', 'Your record is safe :)', 'error');
+      }
+    });
