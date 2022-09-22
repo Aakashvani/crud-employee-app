@@ -3,9 +3,13 @@
 <br />  
 
 <p align="center">
-<img align="center" src="https://img.icons8.com/fluency/48/000000/node-js.png"/>
+<img align="center" src="https://img.icons8.com/color/48/000000/angularjs.png"/>
 <img align="center" src="https://i.imgur.com/t1LI2Zy.png"/> 
-<img align="center" src="https://img.icons8.com/nolan/48/express-js.png"/>
-<img align="center" src="https://i.imgur.com/t1LI2Zy.png"/> 
-<img align="center" src="https://img.icons8.com/color/48/000000/mongodb.png"/>
+<img align="center" src="https://img.icons8.com/color/48/000000/bootstrap.png"/>
 </p>
+
+<br/>
+
+
+<h3>Screen Shot</h3>
+<img src"https://i.imgur.com/vZ6pH0G.jpg" />
